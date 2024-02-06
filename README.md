@@ -1,54 +1,48 @@
-# Backend Engineering Challenge
+# Unbabel CLI Application
 
 
-Welcome to our Engineering Challenge repository 🖖
+This application parses an `--input_file`, here, expressed as a stream of events (translations), processed line by line until reach out an aggregated output. 
 
-If you found this repository it probably means that you are participating in our recruitment process. Thank you for your time and energy. If that's not the case please take a look at our [openings](https://unbabel.com/careers/) and apply!
 
-Please fork this repo before you start working on the challenge, read it careful and take your time and think about the solution. Also, please fork this repository because we will evaluate the code on the fork.
+### Module SMA
 
-This is an opportunity for us both to work together and get to know each other in a more technical way. If you have any questions please open and issue and we'll reach out to help.
+The Simple Moving Average (SMA), is processed every minute within a window event sized in the arguments of the cli (`--window_size`).
+The application is assuming that new events are tailed, as the example below verified by the `timestamp` key. 
+For that manner, we are expecting that input has at least an `translation_id`, the `timestamp` and the `duration` of the translation for SMA calculations.
 
-Good luck!
 
-## Challenge Scenario
+### Application Setup
 
-At Unbabel we deal with a lot of translation data. One of the metrics we use for our clients' SLAs is the delivery time of a translation. 
+##### Activate a virtual environment (recommended)
 
-In the context of this problem, and to keep things simple, our translation flow is going to be modeled as only one event.
+```
+	$ python3 -m venv venv
+	$ source venv/bin/activate
 
-### *translation_delivered*
-
-Example:
-
-```json
-{
-	"timestamp": "2018-12-26 18:12:19.903159",
-	"translation_id": "5aa5b2f39f7254a75aa4",
-	"source_language": "en",
-	"target_language": "fr",
-	"client_name": "airliberty",
-	"event_name": "translation_delivered",
-	"duration": 20,
-	"nr_words": 100
-}
 ```
 
-## Challenge Objective
 
-Your mission is to build a simple command line application that parses a stream of events and produces an aggregated output. In this case, we're interested in calculating, for every minute, a moving average of the translation delivery time for the last X minutes.
+##### Build
 
-If we want to count, for each minute, the moving average delivery time of all translations for the past 10 minutes we would call your application like (feel free to name it anything you like!).
+```
+	$ poetry install
 
-	unbabel_cli --input_file events.json --window_size 10
+```
+
+##### Run
+
+If we want to count, for each minute, the moving average delivery time of all translations for the past 10 minutes:
+```
+	$ unbabel_cli --input_file events.json --window_size 10
+```
 	
 The input file format would be something like:
-
+```
 	{"timestamp": "2018-12-26 18:11:08.509654","translation_id": "5aa5b2f39f7254a75aa5","source_language": "en","target_language": "fr","client_name": "airliberty","event_name": "translation_delivered","nr_words": 30, "duration": 20}
 	{"timestamp": "2018-12-26 18:15:19.903159","translation_id": "5aa5b2f39f7254a75aa4","source_language": "en","target_language": "fr","client_name": "airliberty","event_name": "translation_delivered","nr_words": 30, "duration": 31}
 	{"timestamp": "2018-12-26 18:23:19.903159","translation_id": "5aa5b2f39f7254a75bb3","source_language": "en","target_language": "fr","client_name": "taxi-eats","event_name": "translation_delivered","nr_words": 100, "duration": 54}
+```
 
-Assume that the lines in the input are ordered by the `timestamp` key, from lower (oldest) to higher values, just like in the example input above.
 
 The output file would be something in the following format.
 
@@ -69,18 +63,12 @@ The output file would be something in the following format.
 {"date": "2018-12-26 18:24:00", "average_delivery_time": 42.5}
 ```
 
+
 #### Notes
 
-Before jumping right into implementation we advise you to think about the solution first. We will evaluate, not only if your solution works but also the following aspects:
+For a deeper understanding of the project decisions, 
+I would highly recommend to visit :arrow_right: babel-into-unbabel .
+Your input and updates are welcome! :smiley:
 
-+ Simple and easy to read code. Remember that [simple is not easy](https://www.infoq.com/presentations/Simple-Made-Easy)
-+ Comment your code. The easier it is to understand the complex parts, the faster and more positive the feedback will be
-+ Consider the optimizations you can do, given the order of the input lines
-+ Include a README.md that briefly describes how to build and run your code, as well as how to **test it**
-+ Be consistent in your code. 
-
-Feel free to, in your solution, include some your considerations while doing this challenge. We want you to solve this challenge in the language you feel most comfortable with. Our machines run Python (3.7.x or higher) or Go (1.16.x or higher). If you are thinking of using any other programming language please reach out to us first 🙏.
-
-Also, if you have any problem please **open an issue**. 
-
-Good luck and may the force be with you
+##### Credits
+Part of the base structure was inspired by the templates - [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/)
