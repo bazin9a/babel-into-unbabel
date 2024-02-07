@@ -18,25 +18,21 @@ For that manner, we are expecting that input has at least an `translation_id`, t
 ```
 	$ python3 -m venv venv
 	$ source venv/bin/activate
-
 ```
 
 
 ##### Build
 
 ```
-	$ pip install poetry
+    $ curl -sSL https://install.python-poetry.org | python3 -
 	$ poetry install
-
 ```
 
-##### Tests
+##### Test
 
 ```
-	$ pytest tests
-
+    $ pytest tests
 ```
-
 
 ##### Run
 
