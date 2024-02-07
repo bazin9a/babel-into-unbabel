@@ -9,8 +9,10 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.7"
 click = "^8.0.0"
+pytest = "^6.2.5"
 
 [tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
 
 [tool.black]
 line-length = 150

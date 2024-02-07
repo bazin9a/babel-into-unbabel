@@ -25,9 +25,18 @@ For that manner, we are expecting that input has at least an `translation_id`, t
 ##### Build
 
 ```
+	$ pip install poetry
 	$ poetry install
 
 ```
+
+##### Tests
+
+```
+	$ pytest tests
+
+```
+
 
 ##### Run
 
