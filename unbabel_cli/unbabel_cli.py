@@ -3,9 +3,8 @@ from translations_metrics.sma import sma_translations_process
 
 
 # TODO: add another option for metric entry types (e.g. avg, wpm)
+# TODO: add --verbose arg to explain the cli
 
-# https://click.palletsprojects.com/en/8.1.x/commands/
-# /#group-invocation-without-command
 @click.group(invoke_without_command=True)
 @click.option('-i', '--input_file', default='',
               help='.JSON file expected', )
@@ -26,7 +25,7 @@ def cli(ctx: click.Context, input_file: str, window_size: int) -> None:
          'input_file': input_file,
          'window_size': window_size,
     }
-    # click.echo(ctx.obj['cli_shared_data'].get('input_file'))
+
     cli.add_command(sma_translations_process)
     ctx.invoke(sma_translations_process)
 

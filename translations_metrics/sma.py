@@ -133,17 +133,19 @@ def sma_translations_process(ctx: click.Context) -> None:
             # set previous timestamp before next iteration
             prev_process_timestamp = datetime_trim(str_to_datetime(event["timestamp"]), no_seconds=True)
 
+    # TODO: clear output
     return None
 
 
 def _get_last_timestamp(input_file: str) -> datetime:
     """Get last timestamp from file.
 
-    :param input_file:
-    :return datetime
+    -- the file pointer was used to jump to the end.
 
-    Note: the file pointer was used to jump to the end
+    :param input_file:
         avoiding pass all lines.
+
+    return datetime
     """
     with open(input_file, 'rb') as file:
         # read last line without loop the entire file
