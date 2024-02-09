@@ -106,8 +106,6 @@ def sma_translations_process(ctx: click.Context) -> None:
             # range between previous and current process timestamp
             time_between_events = datetime_diff(prev_process_timestamp, curr_process_timestamp) + SEARCH_STEP
 
-            # popleft when  diff of first date in queue and curr date > window
-
             for _ in range(time_between_events):
                 # -- new event
                 if prev_process_timestamp == curr_process_timestamp:
@@ -142,7 +140,7 @@ def _get_last_timestamp(input_file: str) -> datetime:
     """Get last timestamp from file.
 
     :param input_file:
-    :return date
+    :return datetime
 
     Note: the file pointer was used to jump to the end
         avoiding pass all lines.
@@ -175,6 +173,5 @@ def _get_base_case(file_path: str) -> int:
                 else:
                     return count_lines
             except Exception as e:
-                print("test", count_lines)
                 return e
     return count_lines,
