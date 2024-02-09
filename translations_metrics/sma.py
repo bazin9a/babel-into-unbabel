@@ -41,7 +41,7 @@ def sma_translations_process(ctx: click.Context) -> None:
     Note for SMA calculation there are two ways tsma changes:
         1. every new event
         2. the event in process is equal to window size limit
-    source: [TDD](https://notion)
+    source: [TDD](https://www.notion.so/bazin9a/babel-into-unbabel-e80372ec2226425d87a5fe489eaed3c0?pvs=4)
 
     :param ctx: click context -  (dict) which includes the CLI arguments
 

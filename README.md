@@ -13,45 +13,35 @@ For that manner, we are expecting that input has at least an `translation_id`, t
 
 ### Application Setup
 
-##### Activate a virtual environment (recommended)
 
 ```
+    # Activate a virtual environment (recommended)
 	$ python3 -m venv venv
 	$ source venv/bin/activate
-```
 
-
-##### Build
-
-```
+    # Build
     $ curl -sSL https://install.python-poetry.org | python3 -
 	$ poetry install
-```
 
-##### Test
-
-```
+    # Test
     $ pytest tests
 ```
 
-##### Run
-
-If we want to count, for each minute, the moving average delivery time of all translations for the past 10 minutes:
+If we want to count, for each minute, the moving average delivery time of all translations for the past 10 minutes
 ```
 	$ unbabel_cli --input_file events.json --window_size 10
 ```
 	
-The input file format would be something like:
+#### Example
 ```
+    # :input: The input file format would be something like:
 	{"timestamp": "2018-12-26 18:11:08.509654","translation_id": "5aa5b2f39f7254a75aa5","source_language": "en","target_language": "fr","client_name": "airliberty","event_name": "translation_delivered","nr_words": 30, "duration": 20}
 	{"timestamp": "2018-12-26 18:15:19.903159","translation_id": "5aa5b2f39f7254a75aa4","source_language": "en","target_language": "fr","client_name": "airliberty","event_name": "translation_delivered","nr_words": 30, "duration": 31}
 	{"timestamp": "2018-12-26 18:23:19.903159","translation_id": "5aa5b2f39f7254a75bb3","source_language": "en","target_language": "fr","client_name": "taxi-eats","event_name": "translation_delivered","nr_words": 100, "duration": 54}
 ```
-
-
-The output file would be something in the following format.
-
 ```
+# :output: The output file would be something in the following format.
+
 {"date": "2018-12-26 18:11:00", "average_delivery_time": 0}
 {"date": "2018-12-26 18:12:00", "average_delivery_time": 20}
 {"date": "2018-12-26 18:13:00", "average_delivery_time": 20}
@@ -72,8 +62,10 @@ The output file would be something in the following format.
 #### Notes
 
 For a deeper understanding of the project decisions, 
-I would highly recommend to visit :arrow_right: babel-into-unbabel .
+I would highly recommend to visit 
+
+:arrow_right: [`babel-into-unbabel`](https://www.notion.so/bazin9a/babel-into-unbabel-e80372ec2226425d87a5fe489eaed3c0?pvs=4) .
 Your input and updates are welcome! :smiley:
 
 ##### Credits
-Part of the base structure was inspired by the templates - [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/)
+.gitgnore helper - [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/)
