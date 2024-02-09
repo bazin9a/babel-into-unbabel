@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timedelta
 
 
 def datetime_plus_minutes(input_datetime: datetime, minutes: int) -> datetime:
@@ -9,4 +9,4 @@ def datetime_plus_minutes(input_datetime: datetime, minutes: int) -> datetime:
 
         :return: datetime
         """
-    return input_datetime + datetime.timedelta(minutes=minutes)
+    return input_datetime + timedelta(minutes=minutes)

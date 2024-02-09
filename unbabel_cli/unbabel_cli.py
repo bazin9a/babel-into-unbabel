@@ -26,7 +26,7 @@ def cli(ctx: click.Context, input_file: str, window_size: int) -> None:
          'input_file': input_file,
          'window_size': window_size,
     }
-    click.echo(ctx.obj['cli_shared_data'].get('input_file'))
+    # click.echo(ctx.obj['cli_shared_data'].get('input_file'))
     cli.add_command(sma_translations_process)
     ctx.invoke(sma_translations_process)
 
