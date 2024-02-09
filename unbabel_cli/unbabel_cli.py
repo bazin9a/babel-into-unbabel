@@ -31,7 +31,6 @@ def cli(ctx: click.Context, input_file: str, window_size: int) -> None:
          'window_size': window_size,
     }
 
-
     cli.add_command(sma_translations_process)
     ctx.invoke(sma_translations_process)
 
