@@ -21,7 +21,7 @@ def cli(ctx: click.Context, input_file: str, window_size: int) -> None:
     """
 
     # window should be positive
-    if window_size < 0:
+    if window_size <= 0:
         raise click.UsageError('-w, -window_size must be greater than 0')
 
     # to share between tasks (e.g. sma)
