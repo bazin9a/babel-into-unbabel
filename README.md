@@ -16,28 +16,35 @@ For that manner, we are expecting that input has at least an `translation_id`, t
 
 ```
     # Activate a virtual environment (recommended)
-	$ python3 -m venv venv
-	$ source venv/bin/activate
+    
+    $ python3 -m venv venv
+    $ source venv/bin/activate
+``` 
+```
 
     # Build
+    
     $ curl -sSL https://install.python-poetry.org | python3 -
-	$ poetry install
+    $ poetry install
+
 
     # Test
+    
     $ pytest tests
 ```
 
 If we want to count, for each minute, the moving average delivery time of all translations for the past 10 minutes
 ```
-	$ unbabel_cli --input_file events.json --window_size 10
+    $ unbabel_cli --input_file events.json --window_size 10
 ```
 	
 #### Example
 ```
     # :input: The input file format would be something like:
-	{"timestamp": "2018-12-26 18:11:08.509654","translation_id": "5aa5b2f39f7254a75aa5","source_language": "en","target_language": "fr","client_name": "airliberty","event_name": "translation_delivered","nr_words": 30, "duration": 20}
-	{"timestamp": "2018-12-26 18:15:19.903159","translation_id": "5aa5b2f39f7254a75aa4","source_language": "en","target_language": "fr","client_name": "airliberty","event_name": "translation_delivered","nr_words": 30, "duration": 31}
-	{"timestamp": "2018-12-26 18:23:19.903159","translation_id": "5aa5b2f39f7254a75bb3","source_language": "en","target_language": "fr","client_name": "taxi-eats","event_name": "translation_delivered","nr_words": 100, "duration": 54}
+    
+    {"timestamp": "2018-12-26 18:11:08.509654","translation_id": "5aa5b2f39f7254a75aa5","source_language": "en","target_language": "fr","client_name": "airliberty","event_name": "translation_delivered","nr_words": 30, "duration": 20}
+    {"timestamp": "2018-12-26 18:15:19.903159","translation_id": "5aa5b2f39f7254a75aa4","source_language": "en","target_language": "fr","client_name": "airliberty","event_name": "translation_delivered","nr_words": 30, "duration": 31}
+    {"timestamp": "2018-12-26 18:23:19.903159","translation_id": "5aa5b2f39f7254a75bb3","source_language": "en","target_language": "fr","client_name": "taxi-eats","event_name": "translation_delivered","nr_words": 100, "duration": 54}
 ```
 ```
 # :output: The output file would be something in the following format.
