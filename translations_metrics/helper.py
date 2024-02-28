@@ -15,8 +15,7 @@ def print_output(input_date: datetime, sma: float, output_file: typing.IO = 'out
 
     try:
         with open(output_file, 'a') as file:
-            file.write(f'{{"date": str({input_date}), "average_delivery_time": {eval(stripped_sma)}}}\n')
-            # click.echo({"date": str(input_date), "average_delivery_time": eval(stripped_sma)})
+            file.write(f'{{"date": "{input_date}", "average_delivery_time": {stripped_sma}}}\n')
     except IOError as e:
         click.echo(f"IO ERROR: Unable to open '{output_file}' for writing. {e}")
     return None

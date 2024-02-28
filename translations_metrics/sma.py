@@ -63,10 +63,14 @@ def sma_translations_process(ctx: click.Context) -> None:
         return
 
     # plus base counter
-    if base_case == ONE_LINE_CASE + 1:
+    if base_case == ONE_LINE_CASE:
         event = linecache.getline(input_file, 1)
-        event_dict = dict(eval(event))
-        print_output(event_dict["timestamp"], event_dict["duration"])
+        event_dict = dict(event)
+        print_output(datetime_trim(str_to_datetime(event_dict["timestamp"])), 0.0)
+        print_output(datetime_trim(
+            datetime_plus_minutes(str_to_datetime(event_dict["timestamp"]), 1)),
+            float(event_dict["duration"])
+        )
         return
 
     last_event_timestamp = datetime_trim(_get_last_timestamp(input_file))
@@ -76,12 +80,14 @@ def sma_translations_process(ctx: click.Context) -> None:
         # deque of (date, events/translations duration) tuples
         translations_durations = deque()
 
+        # TODO: remove eval
         # first event timestamp
         try:
             line = file.readline()
             first_event = dict(eval(line))
         except Exception:
             return
+
         prev_process_timestamp = datetime_trim(str_to_datetime(first_event["timestamp"]))
         print_output(prev_process_timestamp, float(ZERO_SMA))
 
@@ -92,8 +98,10 @@ def sma_translations_process(ctx: click.Context) -> None:
         search_limit = datetime_diff(prev_process_timestamp, last_event_timestamp)
 
         # increment the minute processed
-        search_limit = search_limit + SEARCH_STEP
+        search_limit += SEARCH_STEP
 
+
+        # TODO: change this code to function without eval
         for i in range(1, search_limit):
             try:
                 newline = file.readline()
@@ -176,4 +184,5 @@ def _get_base_case(file_path: str) -> int:
                     return count_lines
             except Exception as e:
                 return e
-    return count_lines,
+    return count_lines
+
